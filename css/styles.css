@@ -899,6 +899,27 @@ input[type="range"]:hover::-webkit-slider-thumb { transform: scale(1.15); }
   transform: translate(-50%, 1rem);
   transition: opacity .25s, transform .3s var(--ease), visibility 0s .3s;
 }
+/* Botón flotante de WhatsApp: fijo abajo a la derecha en toda la página */
+.wa-float {
+  position: fixed;
+  z-index: 50;
+  right: max(1.25rem, calc(env(safe-area-inset-right, 0px) + .75rem));
+  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: #25D366;
+  color: #FFFFFF;
+  box-shadow: 0 6px 18px -4px rgba(16, 24, 39, .45);
+  transition: transform .25s var(--ease), box-shadow .25s, background-color .2s;
+}
+.wa-float .icon { width: 1.9rem; height: 1.9rem; stroke-width: 2; }
+.wa-float:hover { background: #1EBE5A; transform: translateY(-3px); box-shadow: 0 10px 24px -6px rgba(16, 24, 39, .5); }
+.wa-float:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.is-locked .wa-float { visibility: hidden; } /* oculto con el menú móvil o un detalle abierto */
+
 .toast.is-visible { opacity: 1; visibility: visible; transform: translate(-50%, 0); transition-delay: 0s; }
 
 /* 14. MOVIMIENTO E IMPRESIÓN ------------------------------------------------------------ */
@@ -913,6 +934,6 @@ input[type="range"]:hover::-webkit-slider-thumb { transform: scale(1.15); }
 }
 
 @media print {
-  .site-header, .toast, .sim__controls, .filters, .hero__actions { display: none; }
+  .site-header, .toast, .sim__controls, .filters, .hero__actions, .wa-float { display: none; }
   .to-reveal { opacity: 1; transform: none; }
 }
