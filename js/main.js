@@ -31,6 +31,11 @@ const SITIO = {
   correo: 'davidtaborda2000@gmail.com', // Ej.: 'nombre@correo.com'
   linkedin: 'https://www.linkedin.com/in/david-taborda-martinez-916a241b3/', // Ej.: 'https://www.linkedin.com/in/tu-usuario'
   github: 'https://github.com/Datamartinez', // Ej.: 'https://github.com/tu-usuario'
+
+  // WhatsApp: número con indicativo del país, solo dígitos (Colombia = 57).
+  // Ej.: '573001234567'. Si queda '', el botón flotante no aparece.
+  whatsapp: '573505698358',
+  whatsappMensaje: 'Hola David, vi tu portafolio y me gustaría hablar contigo sobre tus servicios.',
   institucion: 'Fundación Universitaria CEIPA, 2025', // Ej.: 'Universidad X, 2024'
   foto: 'assets/images/retrato.webp', // Vertical, 4:5. Deja '' para no mostrar foto
 
@@ -384,6 +389,14 @@ function avisar(texto) {
 }
 
 /* B2. DATOS DEL SITIO ----------------------------------------------------- */
+// Botón flotante de WhatsApp: abre el chat con un mensaje inicial
+function iniciarWhatsApp() {
+  const boton = $('#whatsapp');
+  const numero = (SITIO.whatsapp || '').replace(/\D/g, '');
+  boton.hidden = !numero;
+  if (numero) boton.href = `https://wa.me/${numero}?text=${encodeURIComponent(SITIO.whatsappMensaje || '')}`;
+}
+
 function aplicarDatos() {
   $$('[data-bind]').forEach((el) => { el.textContent = SITIO[el.dataset.bind]; });
   $('#anio').textContent = new Date().getFullYear();
@@ -1182,6 +1195,7 @@ function iniciarAnimaciones() {
 }
 
 aplicarDatos();
+iniciarWhatsApp();
 iniciarProyectos();
 iniciarTrayectoria();
 iniciarNavegacion();
