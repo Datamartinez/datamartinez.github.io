@@ -451,17 +451,75 @@ input[type="range"]:hover::-webkit-slider-thumb { transform: scale(1.15); }
 
 .questions, .method { margin-top: clamp(4rem, 8vw, 7rem); }
 .questions h3, .method h3 { font-size: clamp(1.375rem, 1.2rem + .7vw, 1.75rem); }
-.questions ul { margin-top: 1.5rem; }
-.questions li {
+.questions__note { margin-top: .5rem; color: var(--ink-2); }
+/* Tarjetas: gráfico ilustrativo + pregunta + solución */
+.questions ul { display: grid; gap: 1.25rem; margin-top: 1.75rem; }
+.q-card {
   display: grid;
-  gap: .3rem 2rem;
-  padding-block: 1.35rem;
-  border-top: 1px solid var(--line);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--white);
+  transition: border-color .25s, box-shadow .25s;
 }
-.questions li:last-child { border-bottom: 1px solid var(--line); }
-.questions li p { font-size: var(--fs-xl); font-weight: 600; line-height: 1.3; letter-spacing: -.02em; transition: color .2s; }
-.questions li span { color: var(--ink-2); }
-.questions li:hover p { color: var(--blue); }
+.q-card:hover { border-color: #A9BEEB; box-shadow: var(--shadow); }
+.q-card__text { display: grid; align-content: center; gap: .45rem; padding: 1.25rem 1.4rem 1.4rem; }
+.q-card__text p { font-size: var(--fs-xl); font-weight: 600; line-height: 1.3; letter-spacing: -.02em; text-wrap: balance; transition: color .2s; }
+.q-card__text span { color: var(--ink-2); }
+.q-card:hover .q-card__text p { color: var(--blue); }
+
+.q-chart { padding: 1rem 1.1rem .6rem; border-bottom: 1px solid var(--line); background: #F8FAFC; }
+.q-chart figcaption { margin-bottom: .35rem; font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+.q-chart svg { display: block; width: 100%; max-width: 22rem; height: auto; margin-inline: auto; overflow: visible; }
+.q-chart text { font-family: var(--font); font-size: 10.5px; font-weight: 600; fill: var(--ink-2); text-anchor: middle; }
+.q-chart .qc-val text { font-weight: 700; fill: var(--ink); }
+.q-chart .qc-eje text { font-size: 9.5px; }
+.q-chart .qc-eje--izq text { text-anchor: start; }
+.q-chart .qc-val--der text { text-anchor: end; }
+.q-chart .qc-nota { font-size: 9.5px; font-weight: 500; }
+.qc-base { stroke: #CBD5E1; stroke-width: 1; }
+.qc-guia { fill: none; stroke: #94A3B8; stroke-width: 1; stroke-dasharray: 2 2; }
+.qc-meta { stroke: var(--navy); stroke-width: 1.5; stroke-dasharray: 3 2; }
+.qc-pista rect { fill: #E2E8F0; }
+.qc-navy { fill: var(--navy); }
+.qc-azul { fill: var(--blue); }
+.qc-teal { fill: #0D9488; }
+.qc-rojo { fill: #DC6B5A; }
+.qc-banda { fill: rgba(13, 148, 136, .1); }
+.qc-linea { fill: none; stroke-width: 2.25; stroke-linecap: round; }
+.qc-linea--teal { stroke: #0D9488; }
+.qc-linea--azul { stroke: var(--blue); }
+.qc-linea--rojo { stroke: #DC6B5A; stroke-dasharray: 5 3; }
+
+/* Animación al aparecer: las barras crecen y las líneas se dibujan */
+@media (prefers-reduced-motion: no-preference) {
+  .q-card:not(.to-reveal) .qc-bar { transform-box: fill-box; transform-origin: bottom; animation: qc-crece .9s var(--ease) both; }
+  .q-card:not(.to-reveal) .qc-barh { transform-box: fill-box; transform-origin: left; animation: qc-crece-h .9s var(--ease) both; }
+  .q-card:not(.to-reveal) .qc-linea { stroke-dashoffset: 0; animation: qc-dibuja 1.2s var(--ease) both; }
+  .q-card:not(.to-reveal) .qc-linea--rojo { animation-name: qc-aparece; }
+  .qc-bar:nth-of-type(2), .qc-barh:nth-of-type(2) { animation-delay: .08s; }
+  .qc-bar:nth-of-type(3), .qc-barh:nth-of-type(3) { animation-delay: .16s; }
+  .qc-bar:nth-of-type(4), .qc-barh:nth-of-type(4) { animation-delay: .24s; }
+  .qc-bar:nth-of-type(5) { animation-delay: .32s; }
+}
+@keyframes qc-crece { from { transform: scaleY(0); } }
+@keyframes qc-crece-h { from { transform: scaleX(0); } }
+@keyframes qc-dibuja { from { stroke-dasharray: 260; stroke-dashoffset: 260; } to { stroke-dasharray: 260; stroke-dashoffset: 0; } }
+@keyframes qc-aparece { from { opacity: 0; } }
+
+/* Tableta: una columna, gráfico a la izquierda y texto a la derecha */
+@media (min-width: 640px) and (max-width: 1079px) {
+  .q-card { grid-template-columns: minmax(0, 19rem) minmax(0, 1fr); }
+  .q-chart { display: flex; flex-direction: column; justify-content: center; border-right: 1px solid var(--line); border-bottom: 0; }
+}
+/* Escritorio: dos columnas, gráfico arriba y texto abajo */
+@media (min-width: 1080px) {
+  .questions ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+  .q-card { grid-template-rows: auto 1fr; }
+  .q-chart { padding: 1.25rem 1.5rem .9rem; }
+  .q-chart svg { max-width: 25rem; }
+  .q-card__text { align-content: start; padding: 1.35rem 1.6rem 1.6rem; }
+}
 
 .method ol { display: grid; gap: 1.75rem; margin-top: 2rem; counter-reset: paso; }
 .method li { position: relative; padding-left: 2rem; counter-increment: paso; }
@@ -492,7 +550,6 @@ input[type="range"]:hover::-webkit-slider-thumb { transform: scale(1.15); }
 .method p { margin-top: .25rem; color: var(--ink-2); }
 
 @media (min-width: 900px) {
-  .questions li { grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); align-items: baseline; }
   .method ol { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; }
   .method li { padding: 2.1rem 2rem 0 0; }
   .method li::before { top: 0; }
