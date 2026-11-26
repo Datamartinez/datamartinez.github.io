@@ -645,9 +645,12 @@ input[type="range"]:hover::-webkit-slider-thumb { transform: scale(1.15); }
   background: var(--navy);
   color: var(--white);
 }
-/* Logo del cliente: fondo blanco propio para que se lea sobre el azul */
-.ficha__logo { align-self: flex-start; width: 8.5rem; padding: .7rem .85rem; border-radius: 6px; background: #FFFFFF; }
-.ficha__logo img { display: block; width: 100%; height: auto; }
+/* Logo del cliente: fondo blanco propio para que se lea sobre el azul.
+   Todos los logos usan la misma altura (--logo-alto), en la tarjeta y en el
+   detalle, para que conserven la misma escala sin importar su forma. */
+.ficha__logo { --logo-alto: 8rem; align-self: flex-start; max-width: 100%; padding: 1rem 1.25rem; border-radius: 8px; background: #FFFFFF; }
+.ficha__logo img { display: block; width: auto; max-width: 100%; height: var(--logo-alto); object-fit: contain; }
+@media (max-width: 420px) { .ficha__logo { --logo-alto: 6.5rem; } }
 .ficha div { padding-block: .7rem; border-top: 1px solid var(--on-navy-line); }
 .ficha div:first-child { padding-top: 0; border-top: 0; }
 .ficha dt { font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--on-navy-2); }
