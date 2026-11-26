@@ -34,10 +34,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..800&display=swap">
   <!-- Cambia ?v= en cada publicación para que los navegadores descarguen la versión nueva -->
-  <link rel="stylesheet" href="css/styles.css?v=20261126">
+  <link rel="stylesheet" href="css/styles.css?v=20261126b">
 
   <!-- Chart.js se carga desde main.js solo cuando la sección de proyectos se acerca a la pantalla. -->
-  <script src="js/main.js?v=20261126" defer></script>
+  <script src="js/main.js?v=20261126b" defer></script>
 
   <script type="application/ld+json">
   {
@@ -101,6 +101,7 @@
           <li><a href="#sobre-mi">Sobre mí</a></li>
           <li><a href="#habilidades">Habilidades</a></li>
           <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="#servicios">Mis servicios</a></li>
           <li><a href="#trayectoria">Trayectoria</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
@@ -286,7 +287,7 @@
       <div class="wrap">
         <div class="section__head" data-reveal>
           <h2 class="display" id="t-proyectos">Proyectos</h2>
-          <p>Trabajo profesional y análisis de práctica: objetivo, método y hallazgos de cada uno. Los marcados como demostrativos usan datos simulados.</p>
+          <p>Trabajo profesional para clientes reales: objetivo, funciones y hallazgos.</p>
         </div>
         <div class="projects__featured" id="proyectos-destacados" hidden></div>
         <p class="projects__label" id="rotulo-demos" hidden>Proyectos demostrativos <span>Datos simulados</span></p>
@@ -295,9 +296,26 @@
       </div>
     </section>
 
-    <!-- ===================== 5. TRAYECTORIA =====================
+    <!-- ===================== 5. MIS SERVICIOS =====================
+         Las tarjetas se generan desde SERVICIOS en js/main.js -->
+    <section class="section section--gray services" id="servicios" aria-labelledby="t-servicios">
+      <div class="wrap">
+        <div class="section__head" data-reveal>
+          <h2 class="display" id="t-servicios">Mis servicios</h2>
+          <p>Lo que puedo hacer por tu organización o tu proyecto. Cada servicio incluye un ejemplo con datos simulados para que veas cómo se ve el resultado.</p>
+        </div>
+        <div class="projects__grid services__grid" id="lista-servicios"></div>
+        <div class="services__cta" data-reveal>
+          <p>¿Te interesa alguno? Cuéntame qué necesitas y lo definimos juntos.</p>
+          <a class="btn btn--primary" href="#contacto">Escríbeme <svg class="icon" aria-hidden="true"><use href="#i-arrow-down"/></svg></a>
+        </div>
+        <noscript><p>Activa JavaScript para ver los servicios y sus ejemplos.</p></noscript>
+      </div>
+    </section>
+
+    <!-- ===================== 6. TRAYECTORIA =====================
          Las entradas se generan desde TRAYECTORIA en js/main.js -->
-    <section class="section section--gray path" id="trayectoria" aria-labelledby="t-trayectoria">
+    <section class="section path" id="trayectoria" aria-labelledby="t-trayectoria">
       <div class="wrap path__grid">
         <div class="path__head">
           <h2 id="t-trayectoria" data-reveal>Experiencia y formación</h2>
@@ -308,7 +326,7 @@
       </div>
     </section>
 
-    <!-- ===================== 6. CONTACTO ===================== -->
+    <!-- ===================== 7. CONTACTO ===================== -->
     <section class="contact" id="contacto" aria-labelledby="t-contacto">
       <div class="wrap contact__grid">
         <div class="contact__copy" data-reveal>
