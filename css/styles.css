@@ -719,7 +719,7 @@ input[type="range"]:hover::-webkit-slider-thumb { transform: scale(1.15); }
   height: 13px;
   border: 3px solid var(--blue);
   border-radius: 50%;
-  background: var(--gray);
+  background: var(--white); /* mismo fondo de la sección: tapa la línea */
 }
 .entry--pending::before { border-color: #94A3B8; }
 .entry__meta { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .75rem; font-size: var(--fs-s); color: var(--ink-2); }
@@ -745,6 +745,45 @@ input[type="range"]:hover::-webkit-slider-thumb { transform: scale(1.15); }
   .path__grid { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); column-gap: clamp(3rem, 6vw, 6.5rem); }
   .path__head { position: sticky; top: calc(var(--header) + 3rem); align-self: start; }
 }
+
+/* 9b. MIS SERVICIOS ---------------------------------------------------------------- */
+/* Reutiliza las tarjetas de proyecto; aquí van solo las diferencias */
+@media (min-width: 1080px) {
+  .services__grid .project,
+  .services__grid .project:nth-child(5n + 1),
+  .services__grid .project:nth-child(5n + 2) { grid-column: span 2; }
+  .services__grid .project:nth-child(5n + 1) .chart-box,
+  .services__grid .project:nth-child(5n + 2) .chart-box { height: 210px; }
+}
+.ejemplo {
+  display: inline-block;
+  margin-bottom: .6rem;
+  padding: .15rem .5rem;
+  border-radius: 4px;
+  background: var(--blue-wash);
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--blue-dark);
+}
+.service__aviso { font-size: .8125rem; line-height: 1.5; color: var(--ink-2); }
+.service__aviso::before { content: "Nota: "; font-weight: 700; color: var(--ink); }
+.service__aviso--modal { margin-top: 1rem; padding: .75rem 1rem; border-left: 3px solid #D97706; border-radius: 0 4px 4px 0; background: #FFF7ED; font-size: var(--fs-s); }
+.service__ref { padding: .8rem 1rem; border: 1px solid var(--line); border-radius: var(--radius); font-weight: 600; color: var(--ink) !important; }
+.services__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-top: clamp(2rem, 5vw, 3rem);
+  padding: clamp(1.25rem, 3vw, 1.75rem) clamp(1.25rem, 3vw, 2rem);
+  border-radius: 10px;
+  background: var(--navy);
+  color: var(--white);
+}
+.services__cta p { max-width: 36rem; font-size: var(--fs-l); font-weight: 600; }
 
 /* 10. CONTACTO --------------------------------------------------------------------- */
 .contact { padding-block: var(--section) clamp(4rem, 8vw, 7rem); color: var(--white); background: var(--navy); }
