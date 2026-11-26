@@ -25,7 +25,7 @@
 const SITIO = {
   nombre: 'DaTa Martínez',       // Si lo cambias, actualiza también <title> y las etiquetas meta de index.html
 
-  nombreCompleto: 'David Taborda Martínez', // Ficha de Sobre mí y pie de página
+  nombreCompleto: 'David Taborda Martínez', // Sobre mí y pie de página
 
   // Deja '' en lo que todavía no tengas: aparecerá como "por completar".
   correo: 'davidtaborda2000@gmail.com', // Ej.: 'nombre@correo.com'
@@ -412,11 +412,6 @@ function aplicarDatos() {
     const valor = SITIO[el.dataset.linkText].trim();
     if (valor) el.textContent = valor.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
   });
-
-  // Institución en la ficha
-  const inst = $('[data-bind-pending="institucion"]');
-  if (SITIO.institucion) inst.textContent = `, ${SITIO.institucion}`;
-  else if (SITIO.mostrarPendientes) inst.innerHTML = ' <span class="tag tag--pending">Institución por completar</span>';
 
   // Foto opcional
   if (SITIO.foto) {
