@@ -60,12 +60,16 @@ const SITIO = {
    principales" y no se muestra un resultado esperado. Opcionales:
    indicadores: { titulo, filas: [['Etiqueta', porcentaje]] } barras en la ficha
    informe:     { titulo, pasos: [...] } método de un entregable concreto
+   logo:        ruta del logo del cliente (se muestra sobre fondo blanco)
+   metas:       { titulo, resumen, items: [['Plazo', 'Meta']] } metas propias del
+               rol; el resumen va en la tarjeta y la lista en el detalle
    --------------------------------------------------------------------- */
 const PROYECTOS = [
   {
     nombre: 'Consultoría financiera',
     estado: 'profesional',
     cliente: 'Ministerio Verdad y Vida',
+    logo: 'assets/images/logo-mvv.webp',
     rol: 'Consultor financiero',
     periodo: '2026',
     enCurso: true,
@@ -99,6 +103,18 @@ const PROYECTOS = [
       'Identifiqué y documenté diferencias entre hojas del reporte fuente antes de concluir.',
       'Cerré con seis decisiones priorizadas por urgencia, cada una con fecha sugerida.'
     ],
+    metas: {
+      titulo: 'Mis metas para 2027 como consultor',
+      resumen: 'Presupuesto aprobado en enero, informes y flujo de caja cada mes, y un único modelo de datos conciliado.',
+      items: [
+        ['Enero', 'Presupuesto 2027 por centro de costo, con sus supuestos documentados y aprobado por la dirección.'],
+        ['Cada mes', 'Informe de ejecución presupuestal para la dirección, con alerta temprana sobre los centros que se desvíen de su meta.'],
+        ['Cada mes', 'Flujo de caja proyectado y actualizado, para anticipar necesidades de liquidez antes de que ocurran.'],
+        ['Primer trimestre', 'Plan de seguimiento con los dos centros de costo que concentraron el faltante de ingresos en 2026.'],
+        ['Primer semestre', 'Un único modelo de datos en Power BI, conciliado con contabilidad, para que todas las hojas del reporte coincidan.'],
+        ['Cada trimestre', 'Seguimiento a las seis decisiones priorizadas en el informe de octubre, con su avance reportado a la dirección.']
+      ]
+    },
     enlaces: []
   },
   {
@@ -835,7 +851,8 @@ function fichaHTML(p) {
   const periodo = esc(p.periodo || '') + (p.enCurso ? ' <span class="ficha__live">En curso</span>' : '');
   const ind = p.indicadores;
   const pct = (v) => v.toLocaleString('es-CO', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' %';
-  return `<dl class="ficha">${fila('Cliente', esc(p.cliente || ''))}${fila('Rol', esc(p.rol || ''))}${fila('Periodo', periodo)}</dl>
+  const logo = p.logo ? `<div class="ficha__logo"><img src="${esc(p.logo)}" alt="Logo de ${esc(p.cliente || p.nombre)}" width="245" height="180" loading="lazy"></div>` : '';
+  return `${logo}<dl class="ficha">${fila('Cliente', esc(p.cliente || ''))}${fila('Rol', esc(p.rol || ''))}${fila('Periodo', periodo)}</dl>
     ${ind ? `<figure class="ficha__barras">
       <figcaption>${esc(ind.titulo)}</figcaption>
       <dl>${ind.filas.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd><span class="ficha__pista"><span style="width:${Math.min(v, 100)}%"></span></span><b>${pct(v)}</b></dd></div>`).join('')}</dl>
@@ -877,6 +894,7 @@ function iniciarProyectos() {
         <h3>${esc(p.nombre)}</h3>
         <p>${esc(p.descripcion)}</p>
         <ul class="project__tools" aria-label="Herramientas">${p.herramientas.map((h) => `<li>${esc(h)}</li>`).join('')}</ul>
+        ${p.metas?.resumen ? `<p class="project__metas"><span>Metas 2027</span>${esc(p.metas.resumen)}</p>` : ''}
         <button class="project__more" type="button" aria-haspopup="dialog" aria-label="Ver detalle: ${esc(p.nombre)}">Ver detalle ${icon('arrow-up-right')}</button>
       </div>
     </article>`;
@@ -941,6 +959,8 @@ function abrirDetalle(p, origen) {
       <div><h3>${esProfesional(p) ? 'Funciones' : 'Metodología'}</h3>${listaHTML(p.metodologia)}</div>
       ${p.informe ? `<div><h3>${esc(p.informe.titulo)}</h3>${listaHTML(p.informe.pasos)}</div>` : ''}
       ${resultados ? `<div class="${esProfesional(p) ? 'modal__facts-wide' : ''}">${resultados}</div>` : ''}
+      ${p.metas?.items.length ? `<div class="modal__facts-wide"><h3>${esc(p.metas.titulo)}</h3>
+        <ol class="metas">${p.metas.items.map(([plazo, meta]) => `<li><span class="metas__plazo">${esc(plazo)}</span><span>${esc(meta)}</span></li>`).join('')}</ol></div>` : ''}
     </div>
     ${enlaces}`;
 
