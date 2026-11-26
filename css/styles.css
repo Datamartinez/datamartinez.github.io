@@ -645,6 +645,9 @@ input[type="range"]:hover::-webkit-slider-thumb { transform: scale(1.15); }
   background: var(--navy);
   color: var(--white);
 }
+/* Logo del cliente: fondo blanco propio para que se lea sobre el azul */
+.ficha__logo { align-self: flex-start; width: 8.5rem; padding: .7rem .85rem; border-radius: 6px; background: #FFFFFF; }
+.ficha__logo img { display: block; width: 100%; height: auto; }
 .ficha div { padding-block: .7rem; border-top: 1px solid var(--on-navy-line); }
 .ficha div:first-child { padding-top: 0; border-top: 0; }
 .ficha dt { font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--on-navy-2); }
@@ -673,6 +676,8 @@ input[type="range"]:hover::-webkit-slider-thumb { transform: scale(1.15); }
 .project--featured { grid-row: auto; grid-template-rows: none; }
 .project--featured .project__body { gap: .9rem; }
 .project--featured h3 { font-size: clamp(1.4rem, 1.2rem + .8vw, 1.875rem); }
+.project__metas { max-width: 34rem; padding: .75rem 0 .75rem 1rem; border-left: 2px solid var(--teal); font-size: var(--fs-s); line-height: 1.5; color: var(--ink-2); }
+.project__metas span { display: block; margin-bottom: .15rem; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #0F766E; }
 @media (min-width: 900px) {
   .project--featured { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
   .project--featured .project__body { justify-content: center; padding: clamp(1.75rem, 3vw, 2.75rem); }
@@ -812,6 +817,14 @@ input[type="range"]:hover::-webkit-slider-thumb { transform: scale(1.15); }
 .modal__facts ul { list-style: none; }
 .modal__facts li { position: relative; padding-left: 1.1rem; }
 .modal__facts li::before { content: ""; position: absolute; left: 0; top: .72em; width: .45rem; height: 2px; background: var(--teal); }
+/* Metas del rol: plazo a la izquierda, meta a la derecha */
+.metas { display: grid; margin-top: .6rem; list-style: none; border-top: 1px solid var(--line); }
+.modal__facts .metas li { display: grid; gap: .2rem 1.5rem; margin: 0; padding: .8rem 0; border-bottom: 1px solid var(--line); }
+.modal__facts .metas li::before { content: none; }
+.metas__plazo { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #0F766E; }
+@media (min-width: 560px) {
+  .modal__facts .metas li { grid-template-columns: 9rem minmax(0, 1fr); align-items: baseline; }
+}
 .modal__links { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
 .modal__empty { font-size: var(--fs-s); color: var(--ink-2); }
 
