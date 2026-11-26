@@ -60,7 +60,8 @@ const SITIO = {
    principales" y no se muestra un resultado esperado. Opcionales:
    indicadores: { titulo, filas: [['Etiqueta', porcentaje]] } barras en la ficha
    informe:     { titulo, pasos: [...] } método de un entregable concreto
-   logo:        ruta del logo del cliente (se muestra sobre fondo blanco)
+   logo:        ruta del logo del cliente; se muestra sobre fondo blanco y
+               siempre a la misma altura (--logo-alto en styles.css)
    metas:       { titulo, resumen, items: [['Plazo', 'Meta']] } metas propias del
                rol; el resumen va en la tarjeta y la lista en el detalle
    --------------------------------------------------------------------- */
