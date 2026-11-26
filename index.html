@@ -34,10 +34,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..800&display=swap">
   <!-- Cambia ?v= en cada publicación para que los navegadores descarguen la versión nueva -->
-  <link rel="stylesheet" href="css/styles.css?v=20261126h">
+  <link rel="stylesheet" href="css/styles.css?v=20261126i">
 
   <!-- Chart.js se carga desde main.js solo cuando la sección de proyectos se acerca a la pantalla. -->
-  <script src="js/main.js?v=20261126h" defer></script>
+  <script src="js/main.js?v=20261126i" defer></script>
 
   <script type="application/ld+json">
   {
@@ -185,11 +185,86 @@
 
         <div class="questions">
           <h3 data-reveal>Preguntas que ayudo a responder</h3>
+          <p class="questions__note" data-reveal>Cada gráfico muestra, con cifras ilustrativas, el tipo de respuesta que entrego.</p>
+          <!-- Gráficos en SVG con datos ilustrativos; cada uno responde a su pregunta -->
           <ul>
-            <li data-reveal><p>¿Qué está explicando los resultados de este periodo?</p><span>Análisis de estados financieros e indicadores</span></li>
-            <li data-reveal><p>¿En qué se están usando los recursos y qué se puede optimizar?</p><span>Elaboración y revisión de presupuestos</span></li>
-            <li data-reveal><p>¿Qué pasa si cambian los ingresos, los costos o la tasa?</p><span>Simulación de escenarios y evaluación de riesgos</span></li>
-            <li data-reveal><p>¿Qué alternativa de financiación conviene comparar?</p><span>Apalancamiento y estructura de financiación</span></li>
+            <li class="q-card" data-reveal>
+              <figure class="q-chart">
+                <figcaption>Qué movió el resultado</figcaption>
+                <svg viewBox="0 0 240 118" role="img" aria-label="Gráfico de cascada ilustrativo: el resultado pasa de 60 a 62 porque los ingresos suman 25, los costos restan 15 y los gastos restan 8.">
+                  <line class="qc-base" x1="4" y1="92" x2="236" y2="92"/>
+                  <path class="qc-guia" d="M40 38H56M86 15.5H102M132 29H148M178 36.2H194"/>
+                  <rect class="qc-bar qc-navy" x="10" y="38" width="30" height="54" rx="2"/>
+                  <rect class="qc-bar qc-teal" x="56" y="15.5" width="30" height="22.5" rx="2"/>
+                  <rect class="qc-bar qc-rojo" x="102" y="15.5" width="30" height="13.5" rx="2"/>
+                  <rect class="qc-bar qc-rojo" x="148" y="29" width="30" height="7.2" rx="2"/>
+                  <rect class="qc-bar qc-azul" x="194" y="36.2" width="30" height="55.8" rx="2"/>
+                  <g class="qc-val"><text x="25" y="33">60</text><text x="71" y="11">+25</text><text x="117" y="40">−15</text><text x="163" y="47">−8</text><text x="209" y="31">62</text></g>
+                  <g class="qc-eje"><text x="25" y="108">Anterior</text><text x="71" y="108">Ingresos</text><text x="117" y="108">Costos</text><text x="163" y="108">Gastos</text><text x="209" y="108">Actual</text></g>
+                </svg>
+              </figure>
+              <div class="q-card__text">
+                <p>¿Qué está explicando los resultados de este periodo?</p>
+                <span>Análisis de estados financieros e indicadores</span>
+              </div>
+            </li>
+            <li class="q-card" data-reveal>
+              <figure class="q-chart">
+                <figcaption>Ejecución frente al presupuesto</figcaption>
+                <svg viewBox="0 0 240 118" role="img" aria-label="Barras ilustrativas de ejecución presupuestal: Personal 92 %, Operación 112 %, Tecnología 78 % y Mercadeo 101 %. Operación supera lo presupuestado.">
+                  <g class="qc-eje qc-eje--izq"><text x="0" y="20">Personal</text><text x="0" y="45">Operación</text><text x="0" y="70">Tecnología</text><text x="0" y="95">Mercadeo</text></g>
+                  <g class="qc-pista"><rect x="66" y="10" width="140" height="13" rx="2"/><rect x="66" y="35" width="140" height="13" rx="2"/><rect x="66" y="60" width="140" height="13" rx="2"/><rect x="66" y="85" width="140" height="13" rx="2"/></g>
+                  <rect class="qc-barh qc-azul" x="66" y="10" width="107" height="13" rx="2"/>
+                  <rect class="qc-barh qc-rojo" x="66" y="35" width="131" height="13" rx="2"/>
+                  <rect class="qc-barh qc-azul" x="66" y="60" width="91" height="13" rx="2"/>
+                  <rect class="qc-barh qc-azul" x="66" y="85" width="118" height="13" rx="2"/>
+                  <line class="qc-meta" x1="183" y1="4" x2="183" y2="104"/>
+                  <text class="qc-nota" x="183" y="114">100 %</text>
+                  <g class="qc-val qc-val--der"><text x="238" y="20">92 %</text><text x="238" y="45">112 %</text><text x="238" y="70">78 %</text><text x="238" y="95">101 %</text></g>
+                </svg>
+              </figure>
+              <div class="q-card__text">
+                <p>¿En qué se están usando los recursos y qué se puede optimizar?</p>
+                <span>Elaboración y revisión de presupuestos</span>
+              </div>
+            </li>
+            <li class="q-card" data-reveal>
+              <figure class="q-chart">
+                <figcaption>Resultado en tres escenarios</figcaption>
+                <svg viewBox="0 0 240 118" role="img" aria-label="Líneas ilustrativas de tres escenarios que parten del mismo punto: el optimista sube, el base crece poco y el pesimista cae.">
+                  <path class="qc-banda" d="M12 64C70 58 120 40 178 14L178 92C120 82 70 72 12 64Z"/>
+                  <path class="qc-linea qc-linea--teal" d="M12 64C70 58 120 40 178 14"/>
+                  <path class="qc-linea qc-linea--azul" d="M12 64C70 62 120 54 178 48"/>
+                  <path class="qc-linea qc-linea--rojo" d="M12 64C70 72 120 82 178 92"/>
+                  <circle class="qc-navy" cx="12" cy="64" r="3.5"/>
+                  <g class="qc-eje qc-eje--izq"><text x="184" y="18">Optimista</text><text x="184" y="52">Base</text><text x="184" y="96">Pesimista</text></g>
+                  <text class="qc-nota" x="12" y="114">Hoy</text>
+                  <text class="qc-nota" x="178" y="114">+12 meses</text>
+                </svg>
+              </figure>
+              <div class="q-card__text">
+                <p>¿Qué pasa si cambian los ingresos, los costos o la tasa?</p>
+                <span>Simulación de escenarios y evaluación de riesgos</span>
+              </div>
+            </li>
+            <li class="q-card" data-reveal>
+              <figure class="q-chart">
+                <figcaption>Costo efectivo anual de cada alternativa</figcaption>
+                <svg viewBox="0 0 240 118" role="img" aria-label="Barras ilustrativas del costo efectivo anual: crédito 15,8 %, leasing 13,9 %, factoring 19,5 % y aporte de socios 22 %. El leasing es la alternativa de menor costo.">
+                  <line class="qc-base" x1="4" y1="92" x2="236" y2="92"/>
+                  <rect class="qc-bar qc-azul" x="16" y="42" width="34" height="50" rx="2"/>
+                  <rect class="qc-bar qc-teal" x="74" y="48" width="34" height="44" rx="2"/>
+                  <rect class="qc-bar qc-azul" x="132" y="30" width="34" height="62" rx="2"/>
+                  <rect class="qc-bar qc-azul" x="190" y="22" width="34" height="70" rx="2"/>
+                  <g class="qc-val"><text x="33" y="37">15,8 %</text><text x="91" y="43">13,9 %</text><text x="149" y="25">19,5 %</text><text x="207" y="17">22 %</text></g>
+                  <g class="qc-eje"><text x="33" y="108">Crédito</text><text x="91" y="108">Leasing</text><text x="149" y="108">Factoring</text><text x="207" y="108">Socios</text></g>
+                </svg>
+              </figure>
+              <div class="q-card__text">
+                <p>¿Qué alternativa de financiación conviene comparar?</p>
+                <span>Apalancamiento y estructura de financiación</span>
+              </div>
+            </li>
           </ul>
         </div>
 
