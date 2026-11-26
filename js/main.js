@@ -4,6 +4,7 @@
    PARTE A. CONTENIDO EDITABLE  -> lo único que necesitas tocar
      A1. SITIO         nombre, enlaces, hoja de vida, foto
      A2. PROYECTOS     tarjetas del portafolio
+     A2b. SERVICIOS    servicios que ofreces, con su ejemplo
      A3. TRAYECTORIA   línea de tiempo
 
    PARTE B. FUNCIONAMIENTO
@@ -118,95 +119,130 @@ const PROYECTOS = [
     },
     enlaces: []
   },
+];
+
+/* A2b. SERVICIOS ---------------------------------------------------------
+   Servicios que ofreces. Cada uno se muestra como tarjeta en "Mis servicios"
+   y abre un detalle con un ejemplo hecho con datos simulados.
+
+   resumen:     texto corto de la tarjeta
+   paraQue:     qué problema resuelve ("Para qué sirve")
+   proceso:     pasos de trabajo ("Cómo trabajo")
+   entregables: lo que recibe el cliente ("Qué recibes")
+   grafico:     ejemplo con datos simulados (ver GRAFICOS en B5)
+   referencia:  opcional, dónde ya lo aplicas en un proyecto real
+   aviso:       opcional, nota visible en la tarjeta y en el detalle
+   --------------------------------------------------------------------- */
+const SERVICIOS = [
   {
-    nombre: 'Análisis financiero y evaluación de indicadores',
-    estado: 'demostrativo',
-    descripcion: 'Lectura de estados financieros a partir de márgenes, liquidez, endeudamiento y rentabilidad.',
-    objetivo: 'Entender qué explica la evolución de la rentabilidad y qué señales conviene vigilar.',
+    nombre: 'Análisis financiero e indicadores',
+    resumen: 'Leo los estados financieros y explico qué está moviendo la rentabilidad, la liquidez y el endeudamiento.',
+    paraQue: 'Entender la situación financiera de la organización y saber qué señales vigilar antes de tomar decisiones.',
     herramientas: ['Excel', 'Power BI'],
-    metodologia: [
-      'Estandarización de estados financieros por periodo.',
+    proceso: [
+      'Estandarización de los estados financieros por periodo.',
       'Análisis vertical y horizontal.',
       'Cálculo de indicadores y descomposición de la rentabilidad.',
       'Interpretación y priorización de hallazgos.'
     ],
-    resultados: [],
-    resultadoEsperado: 'Un informe breve que relacione cada indicador con su causa y con una recomendación.',
-    grafico: 'margenes',
-    imagen: '', imagenAlt: '',
-    enlaces: []
+    entregables: [
+      'Informe breve con los indicadores clave y lo que explica cada uno.',
+      'Análisis vertical y horizontal de los estados financieros.',
+      'Recomendaciones priorizadas por impacto.'
+    ],
+    grafico: 'margenes'
   },
   {
-    nombre: 'Dashboard financiero en Power BI',
-    estado: 'demostrativo',
-    descripcion: 'Tablero para seguir ingresos, gastos y resultado mensual en una sola vista.',
-    objetivo: 'Reducir el tiempo entre el cierre mensual y la lectura de los resultados.',
+    nombre: 'Tableros financieros en Power BI',
+    resumen: 'Tableros para seguir ingresos, gastos y resultados en una sola vista, con cifras conciliadas contra la fuente.',
+    paraQue: 'Reducir el tiempo entre el cierre del mes y la lectura de los resultados, con una sola versión de las cifras.',
     herramientas: ['Power BI', 'SQL', 'Excel'],
-    metodologia: [
-      'Definición de indicadores y preguntas del usuario.',
+    proceso: [
+      'Definición de indicadores y preguntas de quien usará el tablero.',
       'Modelo de datos en estrella y tabla de calendario.',
       'Medidas DAX para acumulados y variaciones.',
       'Diseño de la vista y validación de cifras.'
     ],
-    resultados: [],
-    resultadoEsperado: 'Un tablero navegable, con cifras conciliadas contra la fuente.',
-    grafico: 'tablero',
-    imagen: '', imagenAlt: '',
-    enlaces: []
-  },
-  {
-    nombre: 'Análisis de datos con Python',
-    estado: 'demostrativo',
-    descripcion: 'Exploración estadística de la relación entre inversión comercial e ingresos.',
-    objetivo: 'Medir qué tan fuerte es la relación y qué tan confiable resulta para proyectar.',
-    herramientas: ['Python', 'SQL'],
-    metodologia: [
-      'Limpieza y validación de los datos.',
-      'Análisis exploratorio y detección de valores atípicos.',
-      'Regresión lineal y revisión de residuos.',
-      'Documentación en un cuaderno reproducible.'
+    entregables: [
+      'Tablero en Power BI con los indicadores acordados.',
+      'Modelo de datos y medidas DAX documentados.',
+      'Validación de las cifras contra la fuente.'
     ],
-    resultados: [],
-    resultadoEsperado: 'Un cuaderno reproducible con conclusiones y límites del modelo.',
-    grafico: 'regresion',
-    imagen: '', imagenAlt: '',
-    enlaces: []
+    grafico: 'tablero'
   },
   {
-    nombre: 'Modelación y proyección de escenarios',
-    estado: 'demostrativo',
-    descripcion: 'Sensibilidad del valor presente neto ante cambios en las variables clave.',
-    objetivo: 'Identificar qué supuestos mueven más el resultado antes de comprometer recursos.',
-    herramientas: ['Excel', 'Python'],
-    metodologia: [
-      'Construcción del flujo de caja base.',
-      'Definición de rangos para cada supuesto.',
-      'Análisis de sensibilidad variable por variable.',
-      'Simulación de escenarios y lectura del riesgo.'
-    ],
-    resultados: [],
-    resultadoEsperado: 'Un modelo parametrizado que permita comparar escenarios y explicar sus diferencias.',
-    grafico: 'sensibilidad',
-    imagen: '', imagenAlt: '',
-    enlaces: []
-  },
-  {
-    nombre: 'Análisis y estructuración de presupuestos',
-    estado: 'demostrativo',
-    descripcion: 'Comparación entre lo presupuestado y lo ejecutado por rubro.',
-    objetivo: 'Detectar desviaciones relevantes y oportunidades para reasignar recursos.',
+    nombre: 'Presupuesto y control de ejecución',
+    resumen: 'Elaboro el presupuesto y hago seguimiento entre lo presupuestado y lo ejecutado por rubro y centro de costo.',
+    paraQue: 'Detectar a tiempo las desviaciones relevantes y reasignar recursos con información confiable.',
     herramientas: ['Excel', 'Power BI'],
-    metodologia: [
+    proceso: [
       'Estructura del presupuesto por rubro y centro de costo.',
       'Cargue y conciliación de la ejecución.',
       'Cálculo de variaciones absolutas y relativas.',
       'Revisión de causas y propuesta de ajustes.'
     ],
-    resultados: [],
-    resultadoEsperado: 'Un formato de seguimiento con alertas por desviación y notas de causa.',
-    grafico: 'presupuesto',
-    imagen: '', imagenAlt: '',
-    enlaces: []
+    entregables: [
+      'Presupuesto por rubro y centro de costo.',
+      'Formato de seguimiento con alertas por desviación.',
+      'Informe periódico de ejecución para la dirección.'
+    ],
+    referencia: 'Lo aplico hoy como consultor financiero del Ministerio Verdad y Vida.',
+    grafico: 'presupuesto'
+  },
+  {
+    nombre: 'Modelación financiera y escenarios',
+    resumen: 'Modelos de flujo de caja y valoración que muestran qué supuestos mueven más el resultado.',
+    paraQue: 'Comparar alternativas e identificar los supuestos críticos antes de comprometer recursos.',
+    herramientas: ['Excel', 'Python'],
+    proceso: [
+      'Construcción del flujo de caja base.',
+      'Definición de rangos para cada supuesto.',
+      'Análisis de sensibilidad variable por variable.',
+      'Simulación de escenarios y lectura del riesgo.'
+    ],
+    entregables: [
+      'Modelo parametrizado en Excel o Python.',
+      'Análisis de sensibilidad y escenarios.',
+      'Resumen de los supuestos críticos y su efecto en el resultado.'
+    ],
+    grafico: 'sensibilidad'
+  },
+  {
+    nombre: 'Análisis de datos con Python',
+    resumen: 'Limpieza, exploración y modelos estadísticos para responder preguntas de negocio con tus propios datos.',
+    paraQue: 'Medir relaciones entre variables y saber qué tan confiables son antes de usarlas para proyectar.',
+    herramientas: ['Python', 'SQL'],
+    proceso: [
+      'Limpieza y validación de los datos.',
+      'Análisis exploratorio y detección de valores atípicos.',
+      'Modelos estadísticos, como la regresión, y revisión de sus supuestos.',
+      'Documentación en un cuaderno reproducible.'
+    ],
+    entregables: [
+      'Datos depurados y validados.',
+      'Cuaderno reproducible con todo el análisis.',
+      'Conclusiones y límites del modelo.'
+    ],
+    grafico: 'regresion'
+  },
+  {
+    nombre: 'Portafolios de inversión: construcción y optimización',
+    resumen: 'Modelos que combinan rentabilidad, riesgo y correlación para comparar portafolios y encontrar las combinaciones eficientes.',
+    paraQue: 'Ver con datos cómo cambian el riesgo y la rentabilidad de un portafolio según su composición en los mercados financieros.',
+    herramientas: ['Python', 'Excel'],
+    proceso: [
+      'Recolección y depuración de precios históricos.',
+      'Cálculo de rentabilidad, volatilidad y correlaciones.',
+      'Optimización media-varianza y frontera eficiente.',
+      'Pruebas de sensibilidad y comparación con portafolios de referencia.'
+    ],
+    entregables: [
+      'Modelo en Python o Excel con la frontera eficiente.',
+      'Comparación de portafolios por riesgo y rentabilidad.',
+      'Informe con supuestos, resultados y limitaciones.'
+    ],
+    aviso: 'Servicio de análisis y modelación. No es asesoría ni recomendación de inversión, y no administro recursos de terceros.',
+    grafico: 'portafolio'
   }
 ];
 
@@ -669,7 +705,11 @@ const DATOS = {
   sube: [38, 24, -21, -12, -8],
   rubros: ['Personal', 'Operación', 'Tecnología', 'Mercadeo', 'Formación'],
   presupuesto: [180, 120, 75, 60, 25],
-  ejecutado: [176, 134, 69, 66, 18]
+  ejecutado: [176, 134, 69, 66, 18],
+  // Portafolio: [volatilidad %, rentabilidad esperada %] de tres activos genéricos
+  activos: [['Renta fija', 4, 5], ['Acciones locales', 14, 9], ['Acciones globales', 19, 12]],
+  frontera: [[3.9, 5.3], [4.0, 5.5], [4.3, 6.0], [5.1, 6.5], [6.0, 7.0], [7.0, 7.5], [8.2, 8.0], [9.4, 8.5], [10.6, 9.0], [11.8, 9.5], [13.1, 10.0], [14.4, 10.5], [15.7, 11.0], [17.1, 11.5], [18.9, 12.0]],
+  combinaciones: [[9.8, 8.5], [14.8, 10.5], [13.6, 9.5], [10.5, 8.8], [12.0, 9.5], [12.9, 9.3], [10.3, 8.1], [13.6, 10.0], [5.5, 6.7], [5.4, 6.3], [8.0, 7.8], [16.7, 11.2], [11.1, 8.9], [4.4, 6.0], [13.4, 10.0], [15.0, 10.7], [9.1, 8.0], [8.7, 8.2], [13.2, 9.6], [10.7, 8.9], [8.8, 8.0], [6.0, 7.0], [5.0, 6.1], [12.7, 9.7], [13.7, 9.2], [11.0, 9.0], [13.5, 9.2], [11.3, 9.2], [12.9, 9.8], [15.6, 10.7], [14.4, 10.4], [15.1, 10.7], [11.2, 8.3], [12.3, 9.4], [16.3, 11.1], [10.6, 9.0], [14.2, 10.4], [10.8, 8.2], [12.4, 9.2], [7.7, 7.7], [6.6, 7.2], [12.4, 9.6], [14.0, 10.3], [11.2, 8.5], [9.7, 8.4], [17.2, 11.5], [5.9, 6.8], [11.7, 9.4], [11.6, 8.4], [14.6, 10.4], [5.6, 6.6], [9.4, 8.4], [6.2, 6.9], [5.0, 6.4]]
 };
 
 function regresion(pares) {
@@ -800,6 +840,30 @@ const GRAFICOS = {
         { callbacks: { label: (c) => ` ${c.dataset.label}: ${num(c.parsed.x)}` } }
       )
     })
+  },
+
+  portafolio: {
+    titulo: 'Rentabilidad esperada según volatilidad anual, % (simulado)',
+    tabla: () => [['Portafolio', 'Volatilidad %', 'Rentabilidad esperada %'],
+      ...DATOS.activos.map(([n, r, m]) => [`${n} (100 %)`, num(r, 1), num(m, 1)]),
+      ...DATOS.frontera.map(([r, m], i) => [i ? `Frontera ${i}` : 'Mínimo riesgo', num(r, 1), num(m, 1)])],
+    config: () => {
+      const xy = ([x, y]) => ({ x, y });
+      return {
+        type: 'scatter',
+        data: {
+          datasets: [
+            { label: 'Frontera eficiente', type: 'line', data: DATOS.frontera.map(xy), borderColor: COLOR.teal, backgroundColor: COLOR.teal, borderWidth: 2, pointRadius: 0, pointHoverRadius: 5, pointHitRadius: 6, tension: 0.3, pointStyle: 'line', order: 1 },
+            { label: 'Activos', data: DATOS.activos.map(([n, x, y]) => ({ x, y, n })), backgroundColor: COLOR.navy, borderColor: '#F8FAFC', borderWidth: 2, pointStyle: 'rectRot', pointRadius: 7, pointHoverRadius: 9, order: 0 },
+            { label: 'Combinaciones posibles', data: DATOS.combinaciones.map(xy), backgroundColor: 'rgba(29, 78, 216, .28)', borderWidth: 0, pointRadius: 3.5, pointHoverRadius: 5, order: 2 }
+          ]
+        },
+        options: conTooltip(
+          opciones({ interaction: { mode: 'nearest', intersect: true }, x: { min: 0, max: 20, grid: { display: false }, ticks: { stepSize: 5, callback: (v) => `${v} %` } }, y: { min: 4, max: 13, ticks: { stepSize: 2, callback: (v) => `${v} %` } } }),
+          { callbacks: { label: (c) => ` ${c.raw.n || c.dataset.label}: riesgo ${num(c.parsed.x, 1)} %, rentabilidad ${num(c.parsed.y, 1)} %` } }
+        )
+      };
+    }
   }
 };
 
@@ -835,6 +899,7 @@ async function pintarGrafico(canvas) {
 const ESTADOS = {
   profesional: ['Proyecto profesional', 'tag tag--live'],
   demostrativo: ['Proyecto demostrativo', 'tag'],
+  servicio: ['Servicio', 'tag'],
   pendiente: ['Pendiente de completar', 'tag tag--pending'],
   publicado: ['Publicado', 'tag tag--live']
 };
@@ -882,37 +947,40 @@ function tablaHTML(p) {
   </table></div></details>`;
 }
 
-function iniciarProyectos() {
-  const lista = $('#lista-proyectos');
-  const destacados = $('#proyectos-destacados');
-  const visibles = PROYECTOS.filter((p) => SITIO.mostrarPendientes || p.estado !== 'pendiente');
+const listaHTML = (l) => `<ul>${l.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>`;
+const herramientasHTML = (p) => `<ul class="project__tools" aria-label="Herramientas">${p.herramientas.map((h) => `<li>${esc(h)}</li>`).join('')}</ul>`;
+const ejemploHTML = (p) => `<p class="ejemplo">Ejemplo con datos simulados</p>${visualHTML(p)}`;
 
-  const tarjeta = (p) => `
-    <article class="project${esProfesional(p) ? ' project--featured' : ''}" data-reveal data-i="${visibles.indexOf(p)}">
-      <div class="project__visual${esProfesional(p) ? ' is-ficha' : ''}">${visualHTML(p)}</div>
-      <div class="project__body">
-        ${estadoHTML(p)}
-        <h3>${esc(p.nombre)}</h3>
-        <p>${esc(p.descripcion)}</p>
-        <ul class="project__tools" aria-label="Herramientas">${p.herramientas.map((h) => `<li>${esc(h)}</li>`).join('')}</ul>
-        ${p.metas?.resumen ? `<p class="project__metas"><span>Metas 2027</span>${esc(p.metas.resumen)}</p>` : ''}
-        <button class="project__more" type="button" aria-haspopup="dialog" aria-label="Detalles del proyecto: ${esc(p.nombre)}">Detalles del proyecto ${icon('arrow-up-right')}</button>
-      </div>
-    </article>`;
+// Tarjeta de proyecto (i = posición en la lista de proyectos visibles)
+const tarjetaProyecto = (p, i) => `
+  <article class="project${esProfesional(p) ? ' project--featured' : ''}" data-reveal data-i="${i}">
+    <div class="project__visual${esProfesional(p) ? ' is-ficha' : ''}">${visualHTML(p)}</div>
+    <div class="project__body">
+      ${estadoHTML(p)}
+      <h3>${esc(p.nombre)}</h3>
+      <p>${esc(p.descripcion)}</p>
+      ${herramientasHTML(p)}
+      ${p.metas?.resumen ? `<p class="project__metas"><span>Metas 2027</span>${esc(p.metas.resumen)}</p>` : ''}
+      <button class="project__more" type="button" aria-haspopup="dialog" aria-label="Detalles del proyecto: ${esc(p.nombre)}">Detalles del proyecto ${icon('arrow-up-right')}</button>
+    </div>
+  </article>`;
 
-  // Los proyectos profesionales van primero y separados de los demostrativos
-  const profesionales = visibles.filter(esProfesional);
-  destacados.innerHTML = profesionales.map(tarjeta).join('');
-  destacados.hidden = !profesionales.length;
-  $('#rotulo-demos').hidden = !profesionales.length;
-  lista.innerHTML = visibles.filter((p) => !esProfesional(p)).map(tarjeta).join('');
+// Tarjeta de servicio (i = posición en SERVICIOS)
+const tarjetaServicio = (s, i) => `
+  <article class="project service" data-reveal data-i="${i}">
+    <div class="project__visual">${ejemploHTML(s)}</div>
+    <div class="project__body">
+      ${estadoHTML({ estado: 'servicio' })}
+      <h3>${esc(s.nombre)}</h3>
+      <p>${esc(s.resumen)}</p>
+      ${herramientasHTML(s)}
+      ${s.aviso ? `<p class="service__aviso">${esc(s.aviso)}</p>` : ''}
+      <button class="project__more" type="button" aria-haspopup="dialog" aria-label="Detalles del servicio: ${esc(s.nombre)}">Detalles del servicio ${icon('arrow-up-right')}</button>
+    </div>
+  </article>`;
 
-  $('#proyectos').addEventListener('click', (e) => {
-    const tarjeta = e.target.closest('.project');
-    if (tarjeta) abrirDetalle(visibles[+tarjeta.dataset.i], $('.project__more', tarjeta));
-  });
-
-  // Los gráficos se cargan cuando la sección se acerca
+// Carga cada gráfico cuando su tarjeta se acerca a la pantalla
+function observarGraficos(contenedor) {
   const obs = new IntersectionObserver((entradas) => {
     entradas.forEach((en) => {
       if (!en.isIntersecting) return;
@@ -920,7 +988,37 @@ function iniciarProyectos() {
       pintarGrafico(en.target);
     });
   }, { rootMargin: '500px 0px' });
-  $$('canvas', lista).forEach((c) => obs.observe(c));
+  $$('canvas', contenedor).forEach((c) => obs.observe(c));
+}
+
+function iniciarProyectos() {
+  const lista = $('#lista-proyectos');
+  const destacados = $('#proyectos-destacados');
+  const visibles = PROYECTOS.filter((p) => SITIO.mostrarPendientes || p.estado !== 'pendiente');
+
+  // Los proyectos profesionales van primero y separados de los demostrativos
+  const profesionales = visibles.filter(esProfesional);
+  const demos = visibles.filter((p) => !esProfesional(p));
+  destacados.innerHTML = profesionales.map((p) => tarjetaProyecto(p, visibles.indexOf(p))).join('');
+  destacados.hidden = !profesionales.length;
+  lista.innerHTML = demos.map((p) => tarjetaProyecto(p, visibles.indexOf(p))).join('');
+  lista.hidden = !demos.length;
+  $('#rotulo-demos').hidden = !(profesionales.length && demos.length);
+
+  $('#proyectos').addEventListener('click', (e) => {
+    const tarjeta = e.target.closest('.project');
+    if (tarjeta) abrirDetalle(visibles[+tarjeta.dataset.i], $('.project__more', tarjeta));
+  });
+  observarGraficos(lista);
+
+  // Servicios
+  const servicios = $('#lista-servicios');
+  servicios.innerHTML = SERVICIOS.map(tarjetaServicio).join('');
+  servicios.addEventListener('click', (e) => {
+    const tarjeta = e.target.closest('.service');
+    if (tarjeta) abrirServicio(SERVICIOS[+tarjeta.dataset.i], $('.project__more', tarjeta));
+  });
+  observarGraficos(servicios);
 
   // Cierre del detalle: botón, clic fuera o Esc (nativo)
   const modal = $('#modal');
@@ -929,6 +1027,8 @@ function iniciarProyectos() {
     const r = modal.getBoundingClientRect();
     const fuera = e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom;
     if (e.target === modal && fuera) modal.close();
+    // "Solicitar este servicio" cierra el detalle y baja a Contacto
+    if (e.target.closest('[data-cerrar]')) { modal.origen = null; modal.close(); }
   });
   modal.addEventListener('close', () => {
     document.body.classList.remove('is-locked');
@@ -937,9 +1037,17 @@ function iniciarProyectos() {
   });
 }
 
-function abrirDetalle(p, origen) {
+function mostrarDetalle(html, origen) {
   const modal = $('#modal');
-  const listaHTML = (l) => `<ul>${l.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>`;
+  $('#modal-cuerpo').innerHTML = html;
+  modal.origen = origen;
+  document.body.classList.add('is-locked');
+  modal.showModal();
+  modal.scrollTop = 0;
+  $$('canvas', modal).forEach(pintarGrafico);
+}
+
+function abrirDetalle(p, origen) {
   const visual = visualHTML(p);
   const resultados = p.resultados.length
     ? `<h3>${esProfesional(p) ? 'Hallazgos principales' : 'Resultados y aprendizajes'}</h3>${listaHTML(p.resultados)}`
@@ -949,7 +1057,7 @@ function abrirDetalle(p, origen) {
     ? `<div class="modal__links">${p.enlaces.map((l) => `<a class="btn btn--line" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${esc(l.texto)} ${icon('arrow-up-right')}</a>`).join('')}</div>`
     : SITIO.mostrarPendientes ? '<div class="modal__links"><span class="tag tag--pending">Enlace al repositorio por completar</span></div>' : '';
 
-  $('#modal-cuerpo').innerHTML = `
+  mostrarDetalle(`
     ${estadoHTML(p)}
     <h2 id="modal-titulo">${esc(p.nombre)}</h2>
     <p class="modal__lead">${esc(p.descripcion)}</p>
@@ -963,13 +1071,24 @@ function abrirDetalle(p, origen) {
       ${p.metas?.items.length ? `<div class="modal__facts-wide"><h3>${esc(p.metas.titulo)}</h3>
         <ol class="metas">${p.metas.items.map(([plazo, meta]) => `<li><span class="metas__plazo">${esc(plazo)}</span><span>${esc(meta)}</span></li>`).join('')}</ol></div>` : ''}
     </div>
-    ${enlaces}`;
+    ${enlaces}`, origen);
+}
 
-  modal.origen = origen;
-  document.body.classList.add('is-locked');
-  modal.showModal();
-  modal.scrollTop = 0;
-  $$('canvas', modal).forEach(pintarGrafico);
+function abrirServicio(s, origen) {
+  mostrarDetalle(`
+    ${estadoHTML({ estado: 'servicio' })}
+    <h2 id="modal-titulo">${esc(s.nombre)}</h2>
+    <p class="modal__lead">${esc(s.resumen)}</p>
+    ${s.aviso ? `<p class="service__aviso service__aviso--modal">${esc(s.aviso)}</p>` : ''}
+    <div class="modal__visual">${ejemploHTML(s)}</div>${tablaHTML(s)}
+    <div class="modal__facts">
+      <div><h3>Para qué sirve</h3><p>${esc(s.paraQue)}</p></div>
+      <div><h3>Herramientas</h3><p>${s.herramientas.map(esc).join(', ')}</p></div>
+      <div><h3>Cómo trabajo</h3>${listaHTML(s.proceso)}</div>
+      <div><h3>Qué recibes</h3>${listaHTML(s.entregables)}</div>
+      ${s.referencia ? `<div class="modal__facts-wide"><p class="service__ref">${esc(s.referencia)}</p></div>` : ''}
+    </div>
+    <div class="modal__links"><a class="btn btn--primary" href="#contacto" data-cerrar>Solicitar este servicio ${icon('arrow-down')}</a></div>`, origen);
 }
 
 /* B7. TRAYECTORIA -------------------------------------------------------------------- */
