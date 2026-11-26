@@ -416,6 +416,9 @@ input[type="range"]:hover::-webkit-slider-thumb { transform: scale(1.15); }
 
 @media (min-width: 480px) {
   .hero__actions { display: flex; flex-wrap: wrap; }
+  /* Tres botones en una fila */
+  .hero__actions { gap: .6rem; }
+  .hero__actions .btn { padding-inline: 1rem; font-size: .9375rem; }
   .hero__role { flex-flow: row wrap; }
   .hero__role span:not(:last-child)::after { content: "|"; }
 }
