@@ -895,7 +895,7 @@ function iniciarProyectos() {
         <p>${esc(p.descripcion)}</p>
         <ul class="project__tools" aria-label="Herramientas">${p.herramientas.map((h) => `<li>${esc(h)}</li>`).join('')}</ul>
         ${p.metas?.resumen ? `<p class="project__metas"><span>Metas 2027</span>${esc(p.metas.resumen)}</p>` : ''}
-        <button class="project__more" type="button" aria-haspopup="dialog" aria-label="Ver detalle: ${esc(p.nombre)}">Ver detalle ${icon('arrow-up-right')}</button>
+        <button class="project__more" type="button" aria-haspopup="dialog" aria-label="Detalles del proyecto: ${esc(p.nombre)}">Detalles del proyecto ${icon('arrow-up-right')}</button>
       </div>
     </article>`;
 
