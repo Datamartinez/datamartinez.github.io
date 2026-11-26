@@ -46,14 +46,61 @@ const SITIO = {
 /* A2. PROYECTOS ---------------------------------------------------------
    Para agregar uno, copia un bloque { ... } y cambia sus datos.
 
-   estado:     'demostrativo' (datos simulados) | 'pendiente' | 'publicado'
+   estado:     'profesional' (trabajo real para un cliente) | 'demostrativo' (datos
+               simulados) | 'pendiente' | 'publicado'
    grafico:    'margenes' | 'tablero' | 'regresion' | 'sensibilidad' | 'presupuesto' | ''
    imagen:     ruta de una captura; si existe, reemplaza al gráfico
    resultados: lista de hallazgos o aprendizajes reales. Si está vacía se
                muestra 'resultadoEsperado' identificado como tal.
    enlaces:    [{ texto: 'Ver repositorio', url: 'https://...' }]
+
+   Los proyectos 'profesional' se muestran destacados, antes de los demostrativos,
+   con una ficha (cliente, rol, periodo) en lugar de gráfico. En ellos
+   'metodologia' se titula "Funciones", 'resultados' se titula "Hallazgos
+   principales" y no se muestra un resultado esperado. Opcionales:
+   indicadores: { titulo, filas: [['Etiqueta', porcentaje]] } barras en la ficha
+   informe:     { titulo, pasos: [...] } método de un entregable concreto
    --------------------------------------------------------------------- */
 const PROYECTOS = [
+  {
+    nombre: 'Consultoría financiera',
+    estado: 'profesional',
+    cliente: 'Ministerio Verdad y Vida',
+    rol: 'Consultor financiero',
+    periodo: '2026',
+    enCurso: true,
+    // Solo porcentajes: el ministerio no publica sus cifras
+    indicadores: {
+      titulo: 'Ejecución frente al presupuesto, enero a octubre de 2026',
+      filas: [['Ingresos', 90.5], ['Gastos', 93.0], ['Excedente', 55]]
+    },
+    descripcion: 'Presupuesto, flujo de caja e informes para la dirección. Entregable más reciente: el análisis financiero y de ejecución presupuestal de enero a octubre de 2026.',
+    objetivo: 'Explicar a la dirección por qué el excedente quedó por debajo de lo previsto y qué decisiones conviene priorizar antes del presupuesto 2027.',
+    herramientas: ['Power BI', 'Excel', 'PowerPoint'],
+    metodologia: [ // Funciones
+      'Elaboración y seguimiento del presupuesto.',
+      'Control del flujo de caja: ingresos, pagos y disponibilidad de recursos.',
+      'Preparación de informes financieros para la dirección.'
+    ],
+    informe: {
+      titulo: 'Cómo hice el informe de enero a octubre',
+      pasos: [
+        'Extracción de las 11 hojas del reporte de Power BI y verificación contra sus totales.',
+        'Comparación entre presupuesto y ejecución por centro de costo y por sede.',
+        'Tendencia del excedente frente a los mismos meses de 2020 a 2025.',
+        'Revisión de la composición de los pasivos.',
+        'Tres escenarios para el cierre del año.'
+      ]
+    },
+    resultados: [
+      'Ingresos al 90,5 % y gastos al 93,0 % del presupuesto: el excedente llegó al 55 % de lo previsto.',
+      'Dos centros de costo explican el 88 % del faltante de ingresos; 13 de 28 centros cumplieron su meta.',
+      'El margen de excedente pasó de 1,6 % a 4,0 % frente a 2025, mientras los ingresos no operacionales cayeron 30 %.',
+      'Identifiqué y documenté diferencias entre hojas del reporte fuente antes de concluir.',
+      'Cerré con seis decisiones priorizadas por urgencia, cada una con fecha sugerida.'
+    ],
+    enlaces: []
+  },
   {
     nombre: 'Análisis financiero y evaluación de indicadores',
     estado: 'demostrativo',
@@ -769,6 +816,7 @@ async function pintarGrafico(canvas) {
 
 /* B6. PROYECTOS Y DETALLE --------------------------------------------------------- */
 const ESTADOS = {
+  profesional: ['Proyecto profesional', 'tag tag--live'],
   demostrativo: ['Proyecto demostrativo', 'tag'],
   pendiente: ['Pendiente de completar', 'tag tag--pending'],
   publicado: ['Publicado', 'tag tag--live']
@@ -779,7 +827,25 @@ const estadoHTML = (p) => {
   return `<span class="${clase}">${texto}</span>`;
 };
 
+const esProfesional = (p) => p.estado === 'profesional';
+
+// Ficha de un proyecto profesional: cliente, rol, periodo y ejes del trabajo
+function fichaHTML(p) {
+  const fila = (k, v) => v ? `<div><dt>${k}</dt><dd>${v}</dd></div>` : '';
+  const periodo = esc(p.periodo || '') + (p.enCurso ? ' <span class="ficha__live">En curso</span>' : '');
+  const ind = p.indicadores;
+  const pct = (v) => v.toLocaleString('es-CO', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' %';
+  return `<dl class="ficha">${fila('Cliente', esc(p.cliente || ''))}${fila('Rol', esc(p.rol || ''))}${fila('Periodo', periodo)}</dl>
+    ${ind ? `<figure class="ficha__barras">
+      <figcaption>${esc(ind.titulo)}</figcaption>
+      <dl>${ind.filas.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd><span class="ficha__pista"><span style="width:${Math.min(v, 100)}%"></span></span><b>${pct(v)}</b></dd></div>`).join('')}</dl>
+      <p>100 % = lo presupuestado</p>
+    </figure>`
+    : p.ejes?.length ? `<ol class="ficha__ejes" aria-label="Ejes del trabajo">${p.ejes.map((e) => `<li>${esc(e)}</li>`).join('')}</ol>` : ''}`;
+}
+
 function visualHTML(p) {
+  if (esProfesional(p)) return fichaHTML(p);
   if (p.imagen) return `<img src="${esc(p.imagen)}" alt="${esc(p.imagenAlt || p.nombre)}" loading="lazy">`;
   const g = GRAFICOS[p.grafico];
   if (!g) return '';
@@ -790,7 +856,7 @@ function visualHTML(p) {
 
 function tablaHTML(p) {
   const g = GRAFICOS[p.grafico];
-  if (p.imagen || !g) return '';
+  if (esProfesional(p) || p.imagen || !g) return '';
   const [cab, ...filas] = g.tabla();
   return `<details class="data-table"><summary>Ver datos en tabla</summary><div class="data-table__scroll" tabindex="0" role="region" aria-label="Datos del gráfico"><table>
     <thead><tr>${cab.map((c) => `<th scope="col">${c}</th>`).join('')}</tr></thead>
@@ -800,11 +866,12 @@ function tablaHTML(p) {
 
 function iniciarProyectos() {
   const lista = $('#lista-proyectos');
+  const destacados = $('#proyectos-destacados');
   const visibles = PROYECTOS.filter((p) => SITIO.mostrarPendientes || p.estado !== 'pendiente');
 
-  lista.innerHTML = visibles.map((p, i) => `
-    <article class="project" data-reveal data-i="${i}">
-      <div class="project__visual">${visualHTML(p)}</div>
+  const tarjeta = (p) => `
+    <article class="project${esProfesional(p) ? ' project--featured' : ''}" data-reveal data-i="${visibles.indexOf(p)}">
+      <div class="project__visual${esProfesional(p) ? ' is-ficha' : ''}">${visualHTML(p)}</div>
       <div class="project__body">
         ${estadoHTML(p)}
         <h3>${esc(p.nombre)}</h3>
@@ -812,9 +879,16 @@ function iniciarProyectos() {
         <ul class="project__tools" aria-label="Herramientas">${p.herramientas.map((h) => `<li>${esc(h)}</li>`).join('')}</ul>
         <button class="project__more" type="button" aria-haspopup="dialog" aria-label="Ver detalle: ${esc(p.nombre)}">Ver detalle ${icon('arrow-up-right')}</button>
       </div>
-    </article>`).join('');
+    </article>`;
 
-  lista.addEventListener('click', (e) => {
+  // Los proyectos profesionales van primero y separados de los demostrativos
+  const profesionales = visibles.filter(esProfesional);
+  destacados.innerHTML = profesionales.map(tarjeta).join('');
+  destacados.hidden = !profesionales.length;
+  $('#rotulo-demos').hidden = !profesionales.length;
+  lista.innerHTML = visibles.filter((p) => !esProfesional(p)).map(tarjeta).join('');
+
+  $('#proyectos').addEventListener('click', (e) => {
     const tarjeta = e.target.closest('.project');
     if (tarjeta) abrirDetalle(visibles[+tarjeta.dataset.i], $('.project__more', tarjeta));
   });
@@ -849,7 +923,8 @@ function abrirDetalle(p, origen) {
   const listaHTML = (l) => `<ul>${l.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>`;
   const visual = visualHTML(p);
   const resultados = p.resultados.length
-    ? `<h3>Resultados y aprendizajes</h3>${listaHTML(p.resultados)}`
+    ? `<h3>${esProfesional(p) ? 'Hallazgos principales' : 'Resultados y aprendizajes'}</h3>${listaHTML(p.resultados)}`
+    : esProfesional(p) ? ''
     : `<h3>Resultado esperado</h3><p>${esc(p.resultadoEsperado || 'Por definir.')}</p>${SITIO.mostrarPendientes ? '<p><span class="tag tag--pending">Resultados por completar</span></p>' : ''}`;
   const enlaces = p.enlaces.length
     ? `<div class="modal__links">${p.enlaces.map((l) => `<a class="btn btn--line" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${esc(l.texto)} ${icon('arrow-up-right')}</a>`).join('')}</div>`
@@ -859,12 +934,13 @@ function abrirDetalle(p, origen) {
     ${estadoHTML(p)}
     <h2 id="modal-titulo">${esc(p.nombre)}</h2>
     <p class="modal__lead">${esc(p.descripcion)}</p>
-    ${visual ? `<div class="modal__visual">${visual}</div>${tablaHTML(p)}` : ''}
+    ${visual ? `<div class="modal__visual${esProfesional(p) ? ' is-ficha' : ''}">${visual}</div>${tablaHTML(p)}` : ''}
     <div class="modal__facts">
       <div><h3>Objetivo</h3><p>${esc(p.objetivo)}</p></div>
       <div><h3>Herramientas</h3><p>${p.herramientas.map(esc).join(', ')}</p></div>
-      <div><h3>Metodología</h3>${listaHTML(p.metodologia)}</div>
-      <div>${resultados}</div>
+      <div><h3>${esProfesional(p) ? 'Funciones' : 'Metodología'}</h3>${listaHTML(p.metodologia)}</div>
+      ${p.informe ? `<div><h3>${esc(p.informe.titulo)}</h3>${listaHTML(p.informe.pasos)}</div>` : ''}
+      ${resultados ? `<div class="${esProfesional(p) ? 'modal__facts-wide' : ''}">${resultados}</div>` : ''}
     </div>
     ${enlaces}`;
 
